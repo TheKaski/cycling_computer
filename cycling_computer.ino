@@ -28,6 +28,8 @@ void printToSerial(unsigned int long value) {
 }
 
 unsigned long int speedSensorPulse() {
+  unsigned long int diff;
+
   // read the state of the pushbutton value:
   speedSensorState = digitalRead(speedSensor);
   // Start the clock when HIGH
@@ -37,6 +39,7 @@ unsigned long int speedSensorPulse() {
       T2 = millis();
       clockEnabled = false;
       hasGoneLow = false;
+      diff = T2-T1;
     }
     T1 = millis();
     clockEnabled = true;
@@ -48,7 +51,7 @@ unsigned long int speedSensorPulse() {
     hasGoneLow = true;
   }
 
-  return T2-T1;
+  return diff;
 
 }
 
