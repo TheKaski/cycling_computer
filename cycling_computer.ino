@@ -11,8 +11,18 @@ unsigned long int T1, T2, timeDiff;  // Time values
 // Setting other variables
 int speedSensorState = 0;  // variable for reading the speedSensor status
 
+// User settings:
+float wheelSize = 27.5; // Wheel size in inches
+float wheelCircumference = wheelSize * 3.1415926535897932384626433832795 * 2.54; // Wheel circumference in cm
+
+
 void setup() {
   Serial.begin(9600);  // Starting serial communication
+
+  // Print user info to serial
+  Serial.print("Wheel circumference in cm: ");
+  Serial.println(wheelCircumference);
+
   pinMode(ledPin, OUTPUT); // initialize the LED pin as an output:
   pinMode(speedSensor, INPUT); // initialize the speedSensor pin as an input:
 }
