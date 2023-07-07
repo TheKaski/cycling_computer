@@ -52,7 +52,7 @@ unsigned long int speedSensorPulse() {
 
 }
 
-void calculate_speed_from_time()
+void calculateSpeedFromTime()
 {
   
 }
