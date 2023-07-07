@@ -1,1 +1,1 @@
-# cycling_computer
+# Cycling computer
