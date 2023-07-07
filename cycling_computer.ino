@@ -42,17 +42,9 @@ unsigned long int speedSensorPulse() {
     digitalWrite(ledPin, LOW);
     has_gone_low = true;
   }
-<<<<<<< Updated upstream
 }
 
 void calculate_speed_from_time()
-=======
-
-  return T2-T1;
-}
-
-void calculateSpeedFromTime()
->>>>>>> Stashed changes
 {
   
 }
