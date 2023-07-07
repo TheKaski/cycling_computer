@@ -1,10 +1,11 @@
 
-// constants won't change. They're used here to set pin numbers:
 const int buttonPin = A2;  // the number of the pushbutton pin
 const int ledPin = 13;    // the number of the LED pin
-unsigned long int T1, T2;
-boolean clock_is_on = false;
-boolean has_gone_low = false; // variables will change:
+
+boolean clock_is_on = false; // Variable for  determining the clock state
+boolean has_gone_low = false; // Variable for detectinng the start of the clock
+
+unsigned long int T1, T2; //Time values
 int buttonState = 0;  // variable for reading the pushbutton status
 
 void setup() {
