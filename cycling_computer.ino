@@ -1,19 +1,19 @@
+// Setting pins
+const int speedSensor = A2;  // speedSensorPin
+const int ledPin = 13;  // the number of the LED pin
 
-const int buttonPin = A2;  // speedSensorPin
-const int ledPin = 13;    // the number of the LED pin
+// Setting clock variables
+boolean clockEnabled = false;  // Variable for determining the clock state
+boolean hasGoneLow = false;  // Variable for detectinng the start of the clock
+unsigned long int T1, T2, timeDiff;  // Time values
 
-boolean clockEnabled = false; // Variable for  determining the clock state
-boolean hasGoneLow = false; // Variable for detectinng the start of the clock
-
-unsigned long int T1, T2, timeDiff; //Time values
-int buttonState = 0;  // variable for reading the pushbutton status
+// Setting other variables
+int speedSensorState = 0;  // variable for reading the speedSensor status
 
 void setup() {
-  Serial.begin(9600);
-  // initialize the LED pin as an output:
-  pinMode(ledPin, OUTPUT);
-  // initialize the pushbutton pin as an input:
-  pinMode(buttonPin, INPUT);
+  Serial.begin(9600);  // Starting serial communication
+  pinMode(ledPin, OUTPUT); // initialize the LED pin as an output:
+  pinMode(speedSensor, INPUT); // initialize the speedSensor pin as an input:
 }
 
 void loop() {
@@ -29,9 +29,9 @@ void printToSerial(unsigned int long value) {
 
 unsigned long int speedSensorPulse() {
   // read the state of the pushbutton value:
-  buttonState = digitalRead(buttonPin);
+  speedSensorState = digitalRead(speedSensor);
   // Start the clock when HIGH
-  if (buttonState == HIGH and hasGoneLow == true) {
+  if (speedSensorState == HIGH and hasGoneLow == true) {
     //If clock is started take T2 and stop the clock
     if(clockEnabled == true){
       T2 = millis();
