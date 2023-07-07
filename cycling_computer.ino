@@ -1,3 +1,4 @@
+
 // Setting pins
 const int speedSensor = A2;  // speedSensorPin
 const int ledPin = 13;  // the number of the LED pin
@@ -29,7 +30,6 @@ void printToSerial(unsigned int long value) {
 
 unsigned long int speedSensorPulse() {
   unsigned long int diff;
-
   // read the state of the pushbutton value:
   speedSensorState = digitalRead(speedSensor);
   // Start the clock when HIGH
@@ -55,7 +55,3 @@ unsigned long int speedSensorPulse() {
 
 }
 
-void calculateSpeedFromTime()
-{
-  
-}
