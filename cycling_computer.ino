@@ -1,4 +1,3 @@
-
 const int buttonPin = A2;  // the number of the pushbutton pin
 const int ledPin = 13;    // the number of the LED pin
 
@@ -14,8 +13,6 @@ void setup() {
   pinMode(ledPin, OUTPUT);
   // initialize the pushbutton pin as an input:
   pinMode(buttonPin, INPUT);
-
-  attachInterrupt(digitalPinToInterrupt(buttonPin), speedSensorPulse, CHANGE);
 }
 
 void loop() {
