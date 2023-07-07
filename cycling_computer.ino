@@ -5,7 +5,7 @@ const int ledPin = 13;    // the number of the LED pin
 boolean clock_is_on = false; // Variable for  determining the clock state
 boolean has_gone_low = false; // Variable for detectinng the start of the clock
 
-unsigned long int T1, T2; //Time values
+unsigned long int T1, T2, timeDiff; //Time values
 int buttonState = 0;  // variable for reading the pushbutton status
 
 void setup() {
@@ -16,6 +16,10 @@ void setup() {
   pinMode(buttonPin, INPUT);
 }
 void loop() {
+  timeDiff = speedSensorPulse();
+}
+
+unsigned long int speedSensorPulse() {
   // read the state of the pushbutton value:
   buttonState = digitalRead(buttonPin);
   // Start the clock when HIGH
@@ -38,9 +42,17 @@ void loop() {
     digitalWrite(ledPin, LOW);
     has_gone_low = true;
   }
+<<<<<<< Updated upstream
 }
 
 void calculate_speed_from_time()
+=======
+
+  return T2-T1;
+}
+
+void calculateSpeedFromTime()
+>>>>>>> Stashed changes
 {
   
 }
