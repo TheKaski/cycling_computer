@@ -37,7 +37,7 @@ void loop() {
   
 }
 void printToSerial(unsigned int long value) {
-  if ( value > 5 ) {
+  if ( value > 100 ) { //100 ms 27.5 inch wheel max speed is 78..km/h 
     Serial.println(value);
   }
 }
