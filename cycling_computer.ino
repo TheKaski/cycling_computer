@@ -5,7 +5,7 @@ const int ledPin = 13;  // the number of the LED pin
 
 // Setting clock variables
 boolean clockEnabled = false;  // Variable for determining the clock state
-boolean hasGoneLow = false;  // Variable for detectinng the start of the clock
+boolean hasGoneLow = false;  // Variable for detecting the start of the clock
 unsigned long int T1, T2, timeDiff;  // Time values
 
 // Setting other variables
@@ -18,7 +18,7 @@ float wheelCircumference = wheelSize * 3.1415926535897932384626433832795 * 2.54 
 void setup() {
   Serial.begin(9600);  // Starting serial communication
 
-  while(! Serial);
+  while(! Serial); //Wait for serial connection for debugging 
 
   // Print user info to serial
   Serial.print("Wheel circumference in m: ");
@@ -26,19 +26,21 @@ void setup() {
 
   pinMode(ledPin, OUTPUT); // initialize the LED pin as an output:
   pinMode(speedSensor, INPUT); // initialize the speedSensor pin as an input:
+
+  //Attatch interrupt to SpeedSensor Pin
+  attachInterrupt(digitalPinToInterrupt(speedSensor), speedSensorInterrupt, RISING);
 }
 
 void loop() {
-  timeDiff = speedSensorPulse();
-  printToSerial(timeDiff);
+  //timeDiff = speedSensorPulse(); //Non InterruptVersion
+  printToSerial(timeDiff);   
+  
 }
-
 void printToSerial(unsigned int long value) {
   if ( value > 5 ) {
     Serial.println(value);
   }
 }
-
 unsigned long int speedSensorPulse() {
   unsigned long int diff;
   // read the state of the pushbutton value:
@@ -61,8 +63,21 @@ unsigned long int speedSensorPulse() {
     digitalWrite(ledPin, LOW);
     hasGoneLow = true;
   }
-
   return diff;
+}
 
+//This is a interrupt function which will take Time T1 or T2 based on clock status
+void speedSensorInterrupt() {
+  //Take end time when clock status is enabled
+  if(clockEnabled)
+  {
+    T2 = millis();
+    timeDiff = T2-T1;
+    clockEnabled = false;
+  }
+
+  //Take T1 Always when clock status is not enabled (Start new clock every time)
+  T1 = millis();
+  clockEnabled = true;
 }
 
