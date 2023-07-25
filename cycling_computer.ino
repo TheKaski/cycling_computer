@@ -11,6 +11,13 @@ unsigned long int T1, T2, timeDiff;  // Time values
 float wheelSize = 27.5; // Wheel size in inches
 float wheelCircumference = wheelSize * 3.1415926535897932384626433832795 * 2.54 / 100; // Wheel circumference in m
 
+// Calculated values:
+float speed;  // Speed in km/h
+float distance;  // distance in km
+float time;  // time in seconds
+float avgSpeed;  // average speed in km/h
+
+
 void setup() {
   Serial.begin(9600);  // Starting serial communication
 
