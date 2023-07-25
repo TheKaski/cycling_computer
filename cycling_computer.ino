@@ -46,6 +46,12 @@ void printToSerial(unsigned int long value) {
   }
 }
 
+float timeToSpeed(unsigned long int spinTime) {
+  speed = wheelCircumference / (spinTime / 1000.0) * 3.6; // Speed in km/h
+  return speed;
+} 
+
+
 //This is a interrupt function which will take Time T1 or T2 based on clock status
 void speedSensorInterrupt() {
   //Take end time when clock status is enabled
