@@ -10,12 +10,13 @@ unsigned long int T1, T2, timeDiff;  // Time values
 // User settings:
 float wheelSize = 27.5; // Wheel size in inches
 float wheelCircumference = wheelSize * 3.1415926535897932384626433832795 * 2.54 / 100; // Wheel circumference in m
+int screenRefreshRate = 1000; // Screen refresh rate in ms
 
 // Calculated values:
-float speed;  // Speed in km/h
-float distance;  // distance in km
-float time;  // time in seconds
-float avgSpeed;  // average speed in km/h
+float speed = 0;  // Speed in km/h
+float distance = 0;  // distance in km
+float time = 0;  // time in seconds
+float avgSpeed = 0;  // average speed in km/h
 
 
 void setup() {
@@ -35,22 +36,26 @@ void setup() {
 }
 
 void loop() {
-  //timeDiff = speedSensorPulse(); //Non InterruptVersion
-  printToSerial(timeDiff);   
+
+  // Calculate speed
+  calculateSpeed(timeDiff);
+
+  printToSerial(speed); // print speed to serial
+  delay(screenRefreshRate);
   
 }
 
 void printToSerial(unsigned int long value) {
-  if ( value > 100 ) { //100 ms 27.5 inch wheel max speed is 78..km/h 
     Serial.println(value);
-  }
 }
 
-float timeToSpeed(unsigned long int spinTime) {
+float calculateSpeed(unsigned long int spinTime) {
+
+  // Calculates speed by dividing wheel circumference by time in seconds and converting to km/h
   speed = wheelCircumference / (spinTime / 1000.0) * 3.6; // Speed in km/h
   return speed;
-} 
 
+} 
 
 //This is a interrupt function which will take Time T1 or T2 based on clock status
 void speedSensorInterrupt() {
