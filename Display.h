@@ -9,7 +9,7 @@ class sevSegmentDisplay {
     public:
     sevSegmentDisplay(int numOfDigits, int digitPins[], int numOfSegments, int segmentPins[]);
     void begin();
-    void show();
+    void show(char data[]);
     /*
     Segment displays consist of N digits
     Therefore there must be atleast 1 or more digit pins
@@ -29,6 +29,7 @@ class sevSegmentDisplay {
 12      D
     */
     private:
+        void showDigit(int digitPin, char dataChar);
         int numOfDigits; //Number of digits on the display
         int numOfSegments; //Number of segments on the display
 
