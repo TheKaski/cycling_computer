@@ -7,9 +7,9 @@
 //7-segment Display start:
 class sevSegmentDisplay {
     public:
-    sevSegmentDisplay(int numOfDigits, int digitPins[], int segmentPins[], bool decimalSegment=false);
+    sevSegmentDisplay(int numOfDigits, int digitPins[], int numOfSegments, int segmentPins[]);
     void begin();
-    void setValue(int value);
+    void show();
     /*
     Segment displays consist of N digits
     Therefore there must be atleast 1 or more digit pins
@@ -18,11 +18,24 @@ class sevSegmentDisplay {
           TO handle this latertwo separate tables for characters need to be developped
     The functionality of the display will stay the same wheter there is
     1 or more segments
+        A
+5      ---
+6   F |   | B
+7     | G |
+8      ---
+9   E |   | C
+10    |   |
+11     ---  .dp
+12      D
     */
     private:
-        int numDigits;
-        int *digitPins[];
-        int *segmentPins[];
+        int numOfDigits; //Number of digits on the display
+        int numOfSegments; //Number of segments on the display
+
+        int *digitPins; //Pins defined for the display in the alphabetical order + dp pin first
+                          //If only 7-segments are given dp will be left out
+        int *segmentPins; //Pins for the different segments of the display. Ordered from left to right 
+
 };
 //7-Segment Display end
 
