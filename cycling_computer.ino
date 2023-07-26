@@ -1,7 +1,6 @@
 
 // Setting pins
 const int speedSensor = 2;  // speedSensorPin
-const int ledPin = 13;  // the number of the LED pin
 
 // Setting clock variables
 boolean clockEnabled = false;  // Variable for determining the clock state
@@ -28,7 +27,6 @@ void setup() {
   Serial.print("Wheel circumference in m: ");
   Serial.println(wheelCircumference);
 
-  pinMode(ledPin, OUTPUT); // initialize the LED pin as an output:
   pinMode(speedSensor, INPUT); // initialize the speedSensor pin as an input:
 
   //Attatch interrupt to SpeedSensor Pin
