@@ -1,6 +1,6 @@
 
 // Setting pins
-const int speedSensor = A2;  // speedSensorPin
+const int speedSensor = 2;  // speedSensorPin
 const int ledPin = 13;  // the number of the LED pin
 
 // Setting clock variables
