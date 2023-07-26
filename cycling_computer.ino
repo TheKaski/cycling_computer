@@ -15,7 +15,7 @@ int screenRefreshRate = 1000; // Screen refresh rate in ms
 // Calculated values:
 float speed = 0;  // Speed in km/h
 float distance = 0;  // distance in km
-float time = 0;  // time in seconds
+float time_s = 0;  // time in seconds
 float avgSpeed = 0;  // average speed in km/h
 
 
