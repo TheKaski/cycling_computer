@@ -1,4 +1,4 @@
-
+#include "Display.h"
 // Setting pins
 const int speedSensor = 2;  // speedSensorPin
 
@@ -17,13 +17,19 @@ float distance = 0;  // distance in km
 float time_s = 0;  // time in seconds
 float avgSpeed = 0;  // average speed in km/h
 
+//Setup display components:         
+int digitPins[] = {21, 2, 3, 4}; // {Dig1, Dig2, Dig3, Dig4}
+int segmentPins[] = {9, 12, 10, 6, 8, 7, 11, 5}; // {DP, A, B, C, D, E, F, G}
+// Initialize the display
+sevSegmentDisplay segmentDisplay(4, digitPins, 7, segmentPins);
+
 
 void setup() {
   Serial.begin(9600);  // Starting serial communication
 
   while(! Serial); //Wait for serial connection for debugging 
 
-  // Print user info to serial
+  //Print user info to serial
   Serial.print("Wheel circumference in m: ");
   Serial.println(wheelCircumference);
 
@@ -31,8 +37,11 @@ void setup() {
 
   //Attatch interrupt to SpeedSensor Pin
   attachInterrupt(digitalPinToInterrupt(speedSensor), speedSensorInterrupt, RISING);
-}
 
+  
+  //Start the display
+  segmentDisplay.begin();
+}
 void loop() {
 
   // Calculate speed
@@ -40,7 +49,9 @@ void loop() {
 
   printToSerial(speed); // print speed to serial
   delay(screenRefreshRate);
-  
+
+  char data[] = "AAAA";
+  segmentDisplay.show(data);
 }
 
 void printToSerial(unsigned int long value) {
