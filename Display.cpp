@@ -25,13 +25,14 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
   //show digit will turn on the segments for the specified character and then light up the full digit
   //This function will use specified charactertable to define the segments
   char data = 'A';
-  uint8_t charToSegments = SevenSegmentASCII[data];
+  uint8_t charToSegments = SevenSegmentASCII[65];
+  Serial.println(charToSegments);
   int segmentPins2[] = {9, 12, 10, 6, 8, 7, 11, 5};
 
   //Turn on the segments
-  for(int i = 0; i < 8; i++)
+  for(int i = 7; i >= 0; i--)
   {
-    int bitValue = bitRead(charToSegments, i);
+    int bitValue = bitRead(charToSegments, i); //NOTE: Bit read reads from least-significant(rightmost bit) to most significant
     Serial.print(bitValue);
     if(bitValue == 1)
     {
