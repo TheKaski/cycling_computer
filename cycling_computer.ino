@@ -50,7 +50,7 @@ void loop() {
   printToSerial(speed); // print speed to serial
   //delay(screenRefreshRate);
 
-  char data[] = "AAAA";
+  char data[] = "1000";
   segmentDisplay.show(data);
 }
 
