@@ -48,7 +48,7 @@ void loop() {
   calculateSpeed(timeDiff);
 
   printToSerial(speed); // print speed to serial
-  delay(screenRefreshRate);
+  //delay(screenRefreshRate);
 
   char data[] = "AAAA";
   segmentDisplay.show(data);

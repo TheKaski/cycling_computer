@@ -24,20 +24,19 @@ void sevSegmentDisplay::begin() {
 void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
   //show digit will turn on the segments for the specified character and then light up the full digit
   //This function will use specified charactertable to define the segments
-  char data = 'A';
-  uint8_t charToSegments = SevenSegmentASCII[65];
-  Serial.println(charToSegments);
-  int segmentPins2[] = {9, 12, 10, 6, 8, 7, 11, 5};
-
+  char data = '0';
+  Serial.println(int(data));
+  uint8_t charToSegments = SevenSegmentASCII[18];
+  int segmentPins[] = {12,10,6,8,7,11,5,9}; //{ A, B, C, D, E, F, G, DP}
   //Turn on the segments
-  for(int i = 7; i >= 0; i--)
+  for(int i = 0; i < 8; i++)
   {
     int bitValue = bitRead(charToSegments, i); //NOTE: Bit read reads from least-significant(rightmost bit) to most significant
     Serial.print(bitValue);
     if(bitValue == 1)
     {
-      int pin = segmentPins2[i];
-      digitalWrite(pin, HIGH); //Turn on the segment
+      int pin = segmentPins[i];
+      digitalWrite(pin,HIGH); //Turn on the segment
     } 
   }
   Serial.println();
@@ -53,7 +52,7 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
     int bitValue = bitRead(charToSegments, i);
     if(bitValue == 1)
     {
-      int pin = segmentPins2[i];
+      int pin = segmentPins[i];
       digitalWrite(pin, LOW); //Turn off the segment
     } 
   }
@@ -67,11 +66,6 @@ void sevSegmentDisplay::show(char data[]) {
   //Go through the data NOTE: longer than 4 or shorter than 4 chars should be able to give
   for(int i = 0; i < 4; i++)
   {
-    Serial.print("Digit: ");
-    Serial.println(i);
-    Serial.print("Pin: ");
-    Serial.println(digitPins2[i]);
-
     showDigit(digitPins2[i], data[i]);
   }
 
