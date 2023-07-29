@@ -24,7 +24,7 @@ void sevSegmentDisplay::begin() {
 void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
   //show digit will turn on the segments for the specified character and then light up the full digit
   //This function will use specified charactertable to define the segment
-  uint8_t charToSegments = SevenSegmentASCII[dataChar-32];  //ASCII table starts from space (ascii value 32) 
+  uint8_t charToSegments = SevenSegmentASCII[dataChar-32];  //ASCII table starts from space char (ASCII value 32) 
   int segmentPins[] = {12,10,6,8,7,11,5,9}; //{ A, B, C, D, E, F, G, DP}
   //Turn on the segments
   for(int i = 0; i < 8; i++)
@@ -36,12 +36,10 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
       digitalWrite(pin,HIGH); //Turn on the segment
     } 
   }
-  Serial.println();
   // Turn on the digit
   digitalWrite(digitPin, HIGH);
-  delay(100);
+  delay(500);
   digitalWrite(digitPin, LOW);
-  delay(100);
 
   //Turn off the segments
   for(int i = 0; i < 8; i++)
@@ -59,12 +57,12 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
 void sevSegmentDisplay::show(char data[]) {
   //The display will show information by turning on the digits one by one
   int digitPins2[] = {21, 2, 3, 4};
-  Serial.println(data);
 
   //Go through the data NOTE: longer than 4 or shorter than 4 chars should be able to give
   for(int i = 0; i < 4; i++)
   {
-    showDigit(digitPins2[i], data[i]);
+    showDigit(21, data[i]);
+    delay(100);
   }
 
 }

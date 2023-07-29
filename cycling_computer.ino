@@ -38,7 +38,6 @@ void setup() {
   //Attatch interrupt to SpeedSensor Pin
   attachInterrupt(digitalPinToInterrupt(speedSensor), speedSensorInterrupt, RISING);
 
-  
   //Start the display
   segmentDisplay.begin();
 }
@@ -47,10 +46,10 @@ void loop() {
   // Calculate speed
   calculateSpeed(timeDiff);
 
-  printToSerial(speed); // print speed to serial
+  //printToSerial(speed); // print speed to serial
   //delay(screenRefreshRate);
 
-  char data[] = "1000";
+  char data[] = "1234";
   segmentDisplay.show(data);
 }
 
