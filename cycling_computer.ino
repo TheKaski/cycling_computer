@@ -18,8 +18,8 @@ float time_s = 0;  // time in seconds
 float avgSpeed = 0;  // average speed in km/h
 
 //Setup display components:         
-int digitPins[] = {21, 2, 3, 4}; // {Dig1, Dig2, Dig3, Dig4}
-int segmentPins[] = {9, 12, 10, 6, 8, 7, 11, 5}; // {DP, A, B, C, D, E, F, G}
+int digitPins[] = {12, 11, 10, 9}; // {Dig1, Dig2, Dig3, Dig4}
+int segmentPins[] = {7, 5, 16, 14, 8, 6, 17, 15}; // {DP, A, B, C, D, E, F, G}
 // Initialize the display
 sevSegmentDisplay segmentDisplay(4, digitPins, 7, segmentPins);
 
