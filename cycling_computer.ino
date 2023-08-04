@@ -50,8 +50,8 @@ void loop() {
   //printToSerial(speed); // print speed to serial
   //delay(screenRefreshRate);
 
-  char data[] = "1234";
-  segmentDisplay.show(data);
+  char data[] = "12";
+  segmentDisplay.show(data, 2);
 }
 
 void printToSerial(unsigned int long value) {
