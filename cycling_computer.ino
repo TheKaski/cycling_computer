@@ -24,8 +24,6 @@ int digitPins[numOfDigits] = {12, 11, 10, 9}; // {Dig1, Dig2, Dig3, Dig4}
 int segmentPins[numOfSegments] = {7, 5, 16, 14, 8, 6, 17, 15}; // {DP, A, B, C, D, E, F, G}
 // Initialize the display
 sevSegmentDisplay segmentDisplay(numOfDigits, digitPins, numOfSegments, segmentPins);
-
-
 void setup() {
   Serial.begin(9600);  // Starting serial communication
 
@@ -40,8 +38,9 @@ void setup() {
   //Attatch interrupt to SpeedSensor Pin
   attachInterrupt(digitalPinToInterrupt(speedSensor), speedSensorInterrupt, RISING);
 
-  //Start the display
+  //Start the display and set the brightness to 100%
   segmentDisplay.begin();
+  segmentDisplay.setBrightnessPercentage(100);
 }
 void loop() {
 

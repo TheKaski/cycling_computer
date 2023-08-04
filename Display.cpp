@@ -26,7 +26,6 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
   //This function will use specified charactertable to define the segment
 
   uint8_t charToSegments = SevenSegmentASCII[dataChar-32];  //ASCII table starts from space (ascii value 32) 
-  //int segmentPins[] = {7, 5, 16, 14, 8, 6, 17, 15}; //{ A, B, C, D, E, F, G, DP}
 
   //Turn on the segments
   for(int i = 0; i < 8; i++)
@@ -40,7 +39,7 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
   }
   // Turn on the digit by setting the digitPin LOW
   digitalWrite(digitPin, LOW);
-  delay(5); //Delay to see the light
+  delay(1); //Delay to see the light
   digitalWrite(digitPin, HIGH); //Turn off
 
   //Turn off the segments
@@ -51,22 +50,23 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
     {
       int pin = this->segmentPins[i];
       digitalWrite(pin, LOW); //Turn off the segment
-     
+  
     } 
   }
-
 }
 
 void sevSegmentDisplay::show(char data[]) {
   //The display will show information by turning on the digits one by one
-
-  int digitPins2[] = {12, 11, 10, 9};
   //Go through the data NOTE: longer than 4 or shorter than 4 chars should be able to give
   for(int i = 0; i < 4; i++)
   {
-    showDigit(digitPins2[i], data[i]);
+    showDigit(this->digitPins[i], data[i]);
+    delay(this->brightness);
   }
-
+}
+void sevSegmentDisplay::setBrightnessPercentage(int brightness) {
+  this->brightness = 10-(brightness / 10); //The brightness value is given as percentage which we convert to PWM delay value to control the brightness
+                                           //by doing this the greater value for brightnes we give the shorter the delay between digits will be 
 }
 //7-Segment Display end
 
