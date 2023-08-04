@@ -2,12 +2,12 @@
 #include "Display.h"
 #include "Segments.h"
 //7-Segment Display start:
-sevSegmentDisplay::sevSegmentDisplay(int numOfDigits, int digitPins[], int numOfSegments, int segmentPins[]) {
+sevSegmentDisplay::sevSegmentDisplay(int numOfDigits, int* digitPins, int numOfSegments, int* segmentPins) {
     //Number of pins and segments given
     this->numOfDigits = numOfDigits;
     this->numOfSegments = numOfSegments;
-    this->digitPins[ numOfDigits ] = *digitPins;
-    this->segmentPins[ numOfSegments ] = *segmentPins; //If the decimal segment is defined 8 segments can be used
+    this->digitPins = digitPins;
+    this->segmentPins = segmentPins; //If the decimal segment is defined 8 segments can be used
 }
 //Set the pins ready to be used
 void sevSegmentDisplay::begin() {
@@ -26,15 +26,15 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
   //This function will use specified charactertable to define the segment
 
   uint8_t charToSegments = SevenSegmentASCII[dataChar-32];  //ASCII table starts from space (ascii value 32) 
-  int segmentPins[] = {7, 5, 16, 14, 8, 6, 17, 15}; //{ A, B, C, D, E, F, G, DP}
+  //int segmentPins[] = {7, 5, 16, 14, 8, 6, 17, 15}; //{ A, B, C, D, E, F, G, DP}
 
   //Turn on the segments
   for(int i = 0; i < 8; i++)
   {
-    int bitValue = bitRead(charToSegments, i); //NOTE: Bit read reads from least-significant(rightmost bit) to most significan
+    int bitValue = bitRead(charToSegments, i); //NOTE: Bit read reads from least-significant(rightmost bit) to most significant
     if(bitValue == 1)
     {
-      int pin = segmentPins[i];
+      int pin = this->segmentPins[i];
       digitalWrite(pin,HIGH); //Turn on the segment
     } 
   }
@@ -49,8 +49,9 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
     int bitValue = bitRead(charToSegments, i);
     if(bitValue == 1)
     {
-      int pin = segmentPins[i];
+      int pin = this->segmentPins[i];
       digitalWrite(pin, LOW); //Turn off the segment
+     
     } 
   }
 
@@ -60,13 +61,10 @@ void sevSegmentDisplay::show(char data[]) {
   //The display will show information by turning on the digits one by one
 
   int digitPins2[] = {12, 11, 10, 9};
-  Serial.println(data);
-
   //Go through the data NOTE: longer than 4 or shorter than 4 chars should be able to give
   for(int i = 0; i < 4; i++)
   {
     showDigit(digitPins2[i], data[i]);
-    
   }
 
 }

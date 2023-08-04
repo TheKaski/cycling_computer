@@ -17,11 +17,13 @@ float distance = 0;  // distance in km
 float time_s = 0;  // time in seconds
 float avgSpeed = 0;  // average speed in km/h
 
-//Setup display components:         
-int digitPins[] = {12, 11, 10, 9}; // {Dig1, Dig2, Dig3, Dig4}
-int segmentPins[] = {7, 5, 16, 14, 8, 6, 17, 15}; // {DP, A, B, C, D, E, F, G}
+//Setup display components:   
+const int numOfDigits = 4;
+const int numOfSegments = 8;      
+int digitPins[numOfDigits] = {12, 11, 10, 9}; // {Dig1, Dig2, Dig3, Dig4}
+int segmentPins[numOfSegments] = {7, 5, 16, 14, 8, 6, 17, 15}; // {DP, A, B, C, D, E, F, G}
 // Initialize the display
-sevSegmentDisplay segmentDisplay(4, digitPins, 7, segmentPins);
+sevSegmentDisplay segmentDisplay(numOfDigits, digitPins, numOfSegments, segmentPins);
 
 
 void setup() {

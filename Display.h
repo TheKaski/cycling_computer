@@ -7,7 +7,7 @@
 //7-segment Display start:
 class sevSegmentDisplay {
     public:
-    sevSegmentDisplay(int numOfDigits, int digitPins[], int numOfSegments, int segmentPins[]);
+    sevSegmentDisplay(int numOfDigits, int* digitPins, int numOfSegments, int* segmentPins);
     void begin();
     void show(char data[]);
     /*
@@ -33,9 +33,9 @@ class sevSegmentDisplay {
         int numOfDigits; //Number of digits on the display
         int numOfSegments; //Number of segments on the display
 
-        int *digitPins; //Pins defined for the display in the alphabetical order + dp pin first
+        int* digitPins; //Pins defined for the display in the alphabetical order + dp pin first
                           //If only 7-segments are given dp will be left out
-        int *segmentPins; //Pins for the different segments of the display. Ordered from left to right 
+        int* segmentPins; //Pins for the different segments of the display. Ordered from left to right 
 
 };
 //7-Segment Display end
