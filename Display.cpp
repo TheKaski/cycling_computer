@@ -38,10 +38,10 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
       digitalWrite(pin,HIGH); //Turn on the segment
     } 
   }
-  // Turn on the digit
-  digitalWrite(digitPin, HIGH);
-  delay(500);
+  // Turn on the digit by setting the digitPin LOW
   digitalWrite(digitPin, LOW);
+  delay(5); //Delay to see the light
+  digitalWrite(digitPin, HIGH); //Turn off
 
   //Turn off the segments
   for(int i = 0; i < 8; i++)
@@ -65,8 +65,8 @@ void sevSegmentDisplay::show(char data[]) {
   //Go through the data NOTE: longer than 4 or shorter than 4 chars should be able to give
   for(int i = 0; i < 4; i++)
   {
-    showDigit(21, data[i]);
-    delay(100);
+    showDigit(digitPins2[i], data[i]);
+    
   }
 
 }
