@@ -34,28 +34,29 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
   for(int i = 0; i < 8; i++)
   {
     int bitValue = bitRead(charToSegments, i); //NOTE: Bit read reads from least-significant(rightmost bit) to most significant
+    int pin = this->segmentPins[i];
+
     if(bitValue == 1)
     {
-      int pin = this->segmentPins[i];
       digitalWrite(pin,HIGH); //Turn on the segment
+    } else {
+      digitalWrite(pin,LOW); //Turn off the segment
     } 
+
   }
   // Turn on the digit by setting the digitPin LOW
-  digitalWrite(digitPin, LOW);
-  delay(1); //Delay to see the light
-  digitalWrite(digitPin, HIGH); //Turn off
+
+  analogWrite(digitPin, 0);
+  delay(20);
+  analogWrite(digitPin, 255);
 
   //Turn off the segments
   for(int i = 0; i < 8; i++)
   {
-    int bitValue = bitRead(charToSegments, i);
-    if(bitValue == 1)
-    {
-      int pin = this->segmentPins[i];
-      digitalWrite(pin, LOW); //Turn off the segment
-  
-    } 
+    int pin = this->segmentPins[i];
+    digitalWrite(pin, LOW); //Turn off the segment
   }
+
 }
 void sevSegmentDisplay::show(char data[], int size) {
   //The display will show information by turning on the digits one by one
@@ -66,7 +67,6 @@ void sevSegmentDisplay::show(char data[], int size) {
       {
         return;
       }
-      
       showDigit(this->digitPins[i], data[i]);
       delay(this->brightness);
   }
