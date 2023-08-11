@@ -47,7 +47,7 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
   // Turn on the digit by setting the digitPin LOW
 
   analogWrite(digitPin, 0);
-  delay(20);
+  delay(1);
   analogWrite(digitPin, 255);
 
   //Turn off the segments
