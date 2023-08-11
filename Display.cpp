@@ -60,17 +60,15 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
 void sevSegmentDisplay::show(char data[], int size) {
   //The display will show information by turning on the digits one by one
   //Go through the data NOTE: longer than 4 or shorter than 4 chars should be able to give
-  for(int i = 0; i < this->numOfDigits; i++)
+  for(int i = 0; i < size; i++)
   { 
-      if(i>=size)
+      if(i>=this->numOfDigits)
       {
-        showDigit(this->digitPins[i], ' ');
-        delay(this->brightness);
+        return;
       }
-      else {
-        showDigit(this->digitPins[i], data[i]);
-        delay(this->brightness);
-      }
+      
+      showDigit(this->digitPins[i], data[i]);
+      delay(this->brightness);
   }
 }
 void sevSegmentDisplay::setBrightnessPercentage(int brightness) {
