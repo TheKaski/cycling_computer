@@ -4,7 +4,7 @@ const int speedSensor = 2;  // speedSensorPin
 
 // Setting clock variables
 boolean clockEnabled = false;  // Variable for determining the clock state
-unsigned long int T1, T2, timeDiff;  // Time values
+unsigned long int T1, T2, timeDiff, clockTime, lastClockTime;  // Time values
 
 // User settings:
 float wheelSize = 27.5; // Wheel size in inches
@@ -43,6 +43,10 @@ void setup() {
   segmentDisplay.setBrightnessPercentage(100);
 }
 void loop() {
+
+  lastClockTime = clockTime;
+  clockTime = millis();
+  Serial.println(clockTime - lastClockTime);
 
   // Calculate speed
   calculateSpeed(timeDiff);
