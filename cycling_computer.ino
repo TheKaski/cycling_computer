@@ -20,8 +20,8 @@ float avgSpeed = 0;  // average speed in km/h
 //Setup display components:   
 const int numOfDigits = 4;
 const int numOfSegments = 8;      
-int digitPins[numOfDigits] = {6, 11, 10, 9}; // {Dig1, Dig2, Dig3, Dig4}
-int segmentPins[numOfSegments] = {7, 5, 16, 14, 8, 12, 17, 15}; // {DP, A, B, C, D, E, F, G}
+int digitPins[numOfDigits] = {9, 10, 11, 12}; // {Dig1, Dig2, Dig3, Dig4} 
+int segmentPins[numOfSegments] = {7, 5, 16, 14, 8, 6, 17, 15}; // { A, B, C, D, E, F, G, DP}
 // Initialize the display
 sevSegmentDisplay segmentDisplay(numOfDigits, digitPins, numOfSegments, segmentPins);
 void setup() {
@@ -54,8 +54,8 @@ void loop() {
   //printToSerial(speed); // print speed to serial
   //delay(screenRefreshRate);
 
-  char data[] = "12";
-  segmentDisplay.show(data, 2);
+  char data[] = "1111";
+  segmentDisplay.show(data, 4);
 }
 
 void printToSerial(unsigned int long value) {
