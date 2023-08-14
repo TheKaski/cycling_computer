@@ -17,25 +17,36 @@ void sevSegmentDisplay::begin() {
 }
 
 void sevSegmentDisplay::show(char data[], int size) {
-  //The display will show information by turning on the digits one by one
-  //Go through the data NOTE: longer than 4 or shorter than 4 chars should be able to give
- 
-  for(int i = 0; i < size; i++)
-  { 
-      if(i>this->numOfDigits)
+  //Function for showing given data on screen. Output will show max ammount of characters that can be fitted in the provided display at once
+  int digit = 0;
+  int dataIndex = 0;
+  //Prints data to digits from left to right
+  while(dataIndex < size )
+  {
+    //Return if display gets full before the end of data[]
+    if(digit >= this->numOfDigits)
+    {
+      return;
+    }
+    //If the next character is dot append it to this digit
+     if(data[dataIndex+1] == '.')
       {
-        return;
+        showDigit(this->digitPins[digit], data[dataIndex], true);
+        dataIndex++; //Skip the dot in the data
+      } else {
+        showDigit(this->digitPins[digit], data[dataIndex]);
       }
-      showDigit(this->digitPins[i], data[i]);
-      //delay(1);
+      digit++; //Move to next digit
+      dataIndex++; //Move to next data char
   }
 }
+
 void sevSegmentDisplay::setBrightnessPercentage(int brightness) {
   this->brightness = 10-(brightness / 10); //The brightness value is given as percentage which we convert to PWM delay value to control the brightness
                                            //by doing this the greater value for brightnes we give the shorter the delay between digits will be 
 }
 //      PRIVATE METHODS:
-void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
+void sevSegmentDisplay::showDigit(int digitPin, char dataChar, bool hasDot){
   //show digit will turn on the segments for the specified character and then light up the full digit
   //This function will use specified charactertable to define the segment
   uint8_t charToSegments = SevenSegmentASCII[dataChar-32];  //ASCII table starts from space (ascii value 32) 
@@ -52,6 +63,9 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar){
     } else {
       digitalWrite(pin,LOW); //Turn off the segment
     } 
+  }
+  if(hasDot == true){
+    digitalWrite(this->segmentPins[this->numOfSegments-1],HIGH);
   }
   // Turn on the digit by setting the digitPin LOW 
   digitalWrite(digitPin, LOW);

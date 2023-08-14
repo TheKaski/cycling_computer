@@ -30,7 +30,7 @@ class sevSegmentDisplay {
 12      D
     */
     private:
-        void showDigit(int digitPin, char dataChar);
+        void showDigit(int digitPin, char dataChar, bool hasDot=false);
         void setupDisplay();
         int numOfDigits; //Number of digits on the display
         int numOfSegments; //Number of segments on the display

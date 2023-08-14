@@ -54,8 +54,8 @@ void loop() {
   //printToSerial(speed); // print speed to serial
   //delay(screenRefreshRate);
 
-  char data[] = "1111";
-  segmentDisplay.show(data, 4);
+  char data[] = "1.2.34";
+  segmentDisplay.show(data, 6); //Number of elements wanted to show is given as a parameter
 }
 
 void printToSerial(unsigned int long value) {
