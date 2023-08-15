@@ -18,7 +18,7 @@ class sevSegmentDisplay {
     NOTE: The display can also be commonCathode or commonAnode which might affect the circuit and use of this library
           TO handle this latertwo separate tables for characters need to be developped
     The functionality of the display will stay the same wheter there is
-    1 or more segments
+    1 or more digits
         A
 5      ---
 6   F |   | B
@@ -32,6 +32,8 @@ class sevSegmentDisplay {
     private:
         void showDigit(int digitPin, char dataChar, bool hasDot=false);
         void setupDisplay();
+        void turnONSegments(uint8_t segmentCode, bool hasDot);
+        void turnOFFSegments();
         int numOfDigits; //Number of digits on the display
         int numOfSegments; //Number of segments on the display
 

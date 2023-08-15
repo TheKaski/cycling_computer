@@ -49,7 +49,7 @@ void loop() {
   Serial.println(clockTime - lastClockTime);
 
   // Calculate speed
-  calculateSpeed(timeDiff);
+  //calculateSpeed(timeDiff);
 
   //printToSerial(speed); // print speed to serial
   //delay(screenRefreshRate);
