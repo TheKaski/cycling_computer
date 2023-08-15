@@ -1,10 +1,10 @@
-
+#include "Display.h"
 // Setting pins
 const int speedSensor = 2;  // speedSensorPin
 
 // Setting clock variables
 boolean clockEnabled = false;  // Variable for determining the clock state
-unsigned long int T1, T2, timeDiff;  // Time values
+unsigned long int T1, T2, timeDiff, clockTime, lastClockTime;  // Time values
 
 // User settings:
 float wheelSize = 27.5; // Wheel size in inches
@@ -17,13 +17,19 @@ float distance = 0;  // distance in km
 float time_s = 0;  // time in seconds
 float avgSpeed = 0;  // average speed in km/h
 
-
+//Setup display components:   
+const int numOfDigits = 4;
+const int numOfSegments = 8;      
+int digitPins[numOfDigits] = {9, 10, 11, 12}; // {Dig1, Dig2, Dig3, Dig4} 
+int segmentPins[numOfSegments] = {7, 5, 16, 14, 8, 6, 17, 15}; // { A, B, C, D, E, F, G, DP}
+// Initialize the display
+sevSegmentDisplay segmentDisplay(numOfDigits, digitPins, numOfSegments, segmentPins);
 void setup() {
   Serial.begin(9600);  // Starting serial communication
 
   while(! Serial); //Wait for serial connection for debugging 
 
-  // Print user info to serial
+  //Print user info to serial
   Serial.print("Wheel circumference in m: ");
   Serial.println(wheelCircumference);
 
@@ -31,16 +37,25 @@ void setup() {
 
   //Attatch interrupt to SpeedSensor Pin
   attachInterrupt(digitalPinToInterrupt(speedSensor), speedSensorInterrupt, RISING);
-}
 
+  //Start the display and set the brightness to 100%
+  segmentDisplay.begin();
+  segmentDisplay.setBrightnessPercentage(100);
+}
 void loop() {
 
-  // Calculate speed
-  calculateSpeed(timeDiff);
+  lastClockTime = clockTime;
+  clockTime = millis();
+  Serial.println(clockTime - lastClockTime);
 
-  printToSerial(speed); // print speed to serial
-  delay(screenRefreshRate);
-  
+  // Calculate speed
+  //calculateSpeed(timeDiff);
+
+  //printToSerial(speed); // print speed to serial
+  //delay(screenRefreshRate);
+
+  char data[] = "1.2.34";
+  segmentDisplay.show(data, 6); //Number of elements wanted to show is given as a parameter
 }
 
 void printToSerial(unsigned int long value) {
