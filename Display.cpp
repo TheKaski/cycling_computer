@@ -73,7 +73,7 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar, bool hasDot)
   turnONSegments(charToSegments, hasDot);
   //Turn on the digit by setting the digitPin LOW 
   digitalWrite(digitPin, LOW); //The digit lights up when segments are HIGH and digit is LOW
-  delay(6); //Delay for seeing the light
+  delay(1); //Delay for seeing the light
   digitalWrite(digitPin, HIGH);
   //Turn the segments off
   turnOFFSegments();
