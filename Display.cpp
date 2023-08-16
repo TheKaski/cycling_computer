@@ -17,10 +17,9 @@ void sevSegmentDisplay::begin()
   setupDisplay();
 }
 
-void sevSegmentDisplay::show(char data[], int size) 
+void sevSegmentDisplay::show(char data[], int size, int delaytime) 
 {
   //Function for showing given data on screen. Output will show max ammount of characters that can be fitted in the provided display at once
-  int delaytime = 500;
   bool refresh = false;
   int T1 = millis();
   while(refresh == false) //THIS IS A TEST IMPLEMENTATION FOR LIMITING THE SCREEN REFRESHRATE  BY SHOWING SAME DATA FOR THE TIME OF DELAYTIME
@@ -72,7 +71,7 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar, bool hasDot)
   turnONSegments(charToSegments, hasDot);
   //Turn on the digit by setting the digitPin LOW 
   digitalWrite(digitPin, LOW); //The digit lights up when segments are HIGH and digit is LOW
-  delay(8); //Delay for seeing the light
+  delay(6); //Delay for seeing the light
   digitalWrite(digitPin, HIGH);
   //Turn the segments off
   turnOFFSegments();

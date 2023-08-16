@@ -9,7 +9,7 @@ class sevSegmentDisplay {
     public:
     sevSegmentDisplay(int numOfDigits, int* digitPins, int numOfSegments, int* segmentPins);
     void begin();
-    void show(char data[], int size);
+    void show(char data[], int size, int delaytime=500);
     void setBrightnessPercentage(int brightness);
     /*
     Segment displays consist of N digits
