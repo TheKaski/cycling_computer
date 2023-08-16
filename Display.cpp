@@ -129,19 +129,22 @@ void sevSegmentDisplay::turnOFFSegments()
 void sevSegmentDisplay::startupAnimation()
 //Function for showing certain data sequence on display mainly in the beginning of the program UNNECESSARY BUT FUN
 {
-  char dataChar = '-';
+  char dataChar = '-'; //Animation character
   uint8_t charToSegments = SevenSegmentASCII[dataChar-32];
+  //Turn on all the digits
   for(int pin = 0; pin < this->numOfDigits; pin++){
     digitalWrite(this->digitPins[pin], LOW);
   }
+  //Turn on the character segments
   turnONSegments(charToSegments);
   delay(400);
-
+  //Turn off and back on all the digits with a delay
   for(int pin = 0; pin < this->numOfDigits; pin++){
     digitalWrite(this->digitPins[pin], HIGH);
     delay(200);
     digitalWrite(this->digitPins[pin], LOW);
   }
+  //Togle the segments on and off with delays
   turnOFFSegments();
   delay(200);
   turnONSegments(charToSegments);
@@ -151,6 +154,7 @@ void sevSegmentDisplay::startupAnimation()
   turnONSegments(charToSegments);
   delay(200);
   turnOFFSegments();
+  //Toggle the digits back off
   for(int pin = 0; pin < this->numOfDigits; pin++){
     digitalWrite(this->digitPins[pin], HIGH);
   }

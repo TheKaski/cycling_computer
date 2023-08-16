@@ -29,8 +29,6 @@ sevSegmentDisplay segmentDisplay(numOfDigits, digitPins, numOfSegments, segmentP
 void setup() {
   Serial.begin(9600);  // Starting serial communication
 
-  while(! Serial); //Wait for serial connection for debugging 
-
   //Print user info to serial
   Serial.print("Wheel circumference in m: ");
   Serial.println(wheelCircumference);
