@@ -32,8 +32,9 @@ class sevSegmentDisplay {
     private:
         void showDigit(int digitPin, char dataChar, bool hasDot=false);
         void setupDisplay();
-        void turnONSegments(uint8_t segmentCode, bool hasDot);
+        void turnONSegments(uint8_t segmentCode, bool hasDot=false);
         void turnOFFSegments();
+        void startupAnimation();
         int numOfDigits; //Number of digits on the display
         int numOfSegments; //Number of segments on the display
 

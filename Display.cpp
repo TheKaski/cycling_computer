@@ -15,6 +15,8 @@ sevSegmentDisplay::sevSegmentDisplay(int numOfDigits, int* digitPins, int numOfS
 void sevSegmentDisplay::begin() 
 {
   setupDisplay();
+  startupAnimation();
+  
 }
 
 void sevSegmentDisplay::show(char data[], int size, int delaytime) 
@@ -121,6 +123,36 @@ void sevSegmentDisplay::turnOFFSegments()
   {
     int pin = this->segmentPins[i];
     digitalWrite(pin, LOW); //Turn off this segment
+  }
+}
+
+void sevSegmentDisplay::startupAnimation()
+//Function for showing certain data sequence on display mainly in the beginning of the program UNNECESSARY BUT FUN
+{
+  char dataChar = '-';
+  uint8_t charToSegments = SevenSegmentASCII[dataChar-32];
+  for(int pin = 0; pin < this->numOfDigits; pin++){
+    digitalWrite(this->digitPins[pin], LOW);
+  }
+  turnONSegments(charToSegments);
+  delay(400);
+
+  for(int pin = 0; pin < this->numOfDigits; pin++){
+    digitalWrite(this->digitPins[pin], HIGH);
+    delay(200);
+    digitalWrite(this->digitPins[pin], LOW);
+  }
+  turnOFFSegments();
+  delay(200);
+  turnONSegments(charToSegments);
+  delay(200);
+  turnOFFSegments();
+  delay(100);
+  turnONSegments(charToSegments);
+  delay(200);
+  turnOFFSegments();
+  for(int pin = 0; pin < this->numOfDigits; pin++){
+    digitalWrite(this->digitPins[pin], HIGH);
   }
 }
 
