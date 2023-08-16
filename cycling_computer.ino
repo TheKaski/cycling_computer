@@ -1,4 +1,6 @@
 #include "Display.h"
+#include <avr/dtostrf.h>
+
 // Setting pins
 const int speedSensor = 2;  // speedSensorPin
 
@@ -46,16 +48,24 @@ void loop() {
 
   lastClockTime = clockTime;
   clockTime = millis();
-  Serial.println(clockTime - lastClockTime);
+  //Serial.println(clockTime - lastClockTime);
 
   // Calculate speed
   //calculateSpeed(timeDiff);
 
   //printToSerial(speed); // print speed to serial
   //delay(screenRefreshRate);
-
+/*
   char data[] = "1.2.34";
   segmentDisplay.show(data, 6); //Number of elements wanted to show is given as a parameter
+*/  
+  //TEST CODE FOR THE SEGMENT DISPLAY:
+  for(float i = 0.0; i <= 100.0; i++)
+  {
+    char result[8];
+    dtostrf(i, 6, 2, result);
+    segmentDisplay.show(result, 6);
+  }
 }
 
 void printToSerial(unsigned int long value) {

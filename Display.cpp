@@ -20,27 +20,38 @@ void sevSegmentDisplay::begin()
 void sevSegmentDisplay::show(char data[], int size) 
 {
   //Function for showing given data on screen. Output will show max ammount of characters that can be fitted in the provided display at once
-  int digit = 0;
-  int dataIndex = 0;
-  //Prints data to digits from left to right
-  while(dataIndex < size )  
+  int delaytime = 500;
+  bool refresh = false;
+  int T1 = millis();
+  while(refresh == false) //THIS IS A TEST IMPLEMENTATION FOR LIMITING THE SCREEN REFRESHRATE  BY SHOWING SAME DATA FOR THE TIME OF DELAYTIME
   {
-    //Return if display gets full before the end of data[]
-    if(digit >= this->numOfDigits)
+    int digit = 0;
+    int dataIndex = 0;
+    //Prints data to digits from left to right
+    while(dataIndex < size )  
     {
-      return;
-    }
+      //Return if display gets full before the end of data[]
+      if(digit >= this->numOfDigits)
+      {
+        break;
+      }
 
-    //If the next character is dot append it to this digit and skip the dot next round
-    if(data[dataIndex+1] == '.')
-    {
-      showDigit(this->digitPins[digit], data[dataIndex], true);
-      dataIndex++; //Skip the dot in the data
-    } else {
-      showDigit(this->digitPins[digit], data[dataIndex]);
+      //If the next character is dot append it to this digit and skip the dot next round
+      if(data[dataIndex+1] == '.')
+      {
+        showDigit(this->digitPins[digit], data[dataIndex], true);
+        dataIndex++; //Skip the dot in the data
+      } else {
+        showDigit(this->digitPins[digit], data[dataIndex]);
+      }
+      digit++; //Move to next digit
+      dataIndex++; //Move to next data char
     }
-    digit++; //Move to next digit
-    dataIndex++; //Move to next data char
+    int T2 = millis();
+    if(T2-T1 > delaytime) 
+    {
+      refresh = true;
+    } 
   }
 }
 
@@ -61,7 +72,7 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar, bool hasDot)
   turnONSegments(charToSegments, hasDot);
   //Turn on the digit by setting the digitPin LOW 
   digitalWrite(digitPin, LOW); //The digit lights up when segments are HIGH and digit is LOW
-  delay(3); //Delay for seeing the light
+  delay(8); //Delay for seeing the light
   digitalWrite(digitPin, HIGH);
   //Turn the segments off
   turnOFFSegments();
