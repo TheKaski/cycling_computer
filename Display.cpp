@@ -68,15 +68,15 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar, bool hasDot)
   //show digit will turn on the segments for the specified character and then light up the full digit
   //This function will use specified charactertable to translate characters to segments
   uint8_t charToSegments = SevenSegmentASCII[dataChar-32];  //get the segmentcode with the given datachar
-  
-  //Turn the segments on
+   //Turn the segments on
   turnONSegments(charToSegments, hasDot);
   //Turn on the digit by setting the digitPin LOW 
   digitalWrite(digitPin, LOW); //The digit lights up when segments are HIGH and digit is LOW
-  delay(1); //Delay for seeing the light
-  digitalWrite(digitPin, HIGH);
+  delay(6); //Delay for seeing the light
   //Turn the segments off
   turnOFFSegments();
+  digitalWrite(digitPin, HIGH);
+
 }
 
 void sevSegmentDisplay::setupDisplay()
@@ -129,7 +129,7 @@ void sevSegmentDisplay::turnOFFSegments()
 void sevSegmentDisplay::startupAnimation()
 //Function for showing certain data sequence on display mainly in the beginning of the program UNNECESSARY BUT FUN
 {
-  char dataChar = '-'; //Animation character
+  char dataChar = '8'; //Animation character
   uint8_t charToSegments = SevenSegmentASCII[dataChar-32];
   //Turn on all the digits
   for(int pin = 0; pin < this->numOfDigits; pin++){

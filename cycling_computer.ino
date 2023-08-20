@@ -49,7 +49,12 @@ void loop() {
   //Serial.println(clockTime - lastClockTime);
 
   // Calculate speed
-  //calculateSpeed(timeDiff);
+  /*
+  calculateSpeed(timeDiff);
+  char result[8];
+  dtostrf(timeDiff, 6, 2, result);
+  segmentDisplay.show(result, 6);*/
+
 
   //printToSerial(speed); // print speed to serial
   //delay(screenRefreshRate);
@@ -62,8 +67,9 @@ void loop() {
   {
     char result[8];
     dtostrf(i, 6, 2, result);
-    segmentDisplay.show(result, 6);
+    segmentDisplay.show(result, 6, 250);
   }
+  
 }
 
 void printToSerial(unsigned int long value) {
