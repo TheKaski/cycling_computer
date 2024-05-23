@@ -36,7 +36,6 @@ void sevSegmentDisplay::show(char data[], int size, int delaytime)
       {
         break;
       }
-
       //If the next character is dot append it to this digit and skip the dot next round
       if(data[dataIndex+1] == '.')
       {
