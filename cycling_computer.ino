@@ -13,7 +13,7 @@ unsigned long int cadenceT1, cadenceT2; // Time values used by the cadenceSensor
 
 // Setting displayindex variable:
 int navIndex = 0; 
-const in maxIndex = 2; // adjust this variable based on how many variables you want to show on screen.
+const int maxIndex = 2; // adjust this variable based on how many variables you want to show on screen.
 
 // User specific settings:
 float wheelSize = 27.5; // Wheel size in inches you want to adjust this based on your bike
@@ -197,7 +197,7 @@ void cadenceSensorInterrupt() {
   if(cadenceClockEnabled)
   {
     cadenceT2 = millis();
-    float deltaTime = CadenceT2-cadenceT1;
+    float deltaTime = cadenceT2-cadenceT1;
     //If the timeDifference is greater then 1ms calculate speed from it
     if( deltaTime > 1 )
     {
