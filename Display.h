@@ -10,7 +10,6 @@ class sevSegmentDisplay {
     sevSegmentDisplay(int numOfDigits, int* digitPins, int numOfSegments, int* segmentPins);
     void begin();
     void show(char data[], int size, int delaytime=500);
-    void setBrightnessPercentage(int brightness);
     /*
     Segment displays consist of N digits
     Therefore there must be atleast 1 or more digit pins
@@ -42,10 +41,6 @@ class sevSegmentDisplay {
                           //If only 7-segments are given dp will be left out
         int* segmentPins; //Pins for the different segments of the display. Ordered from left to right 
 
-        int brightness = 0; //Variable for controlling the brightness of the screen default set to 1
-
 };
 //7-Segment Display end
-
-//Other displays:TODO
 #endif

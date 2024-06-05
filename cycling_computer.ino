@@ -54,7 +54,6 @@ void setup() {
 
   //Start the display and set the brightness to 100%
   segmentDisplay.begin();
-  segmentDisplay.setBrightnessPercentage(100);
 }
 void loop() {
 
@@ -129,7 +128,6 @@ void displayNavigationBar(int navIndex)
   segmentDisplay.show(navBar, 4);
   delay(200);
   return;
-
 }
 
 //Function for checking elapsed time used to detect wheter wheel has stopped
@@ -164,7 +162,6 @@ float calculateCadence(unsigned long int rotationTime) {
   float rpm = 60.0 / rotationTime;
   return rpm;
 }
-
 
 //This is a interrupt function which will take Time T1 or T2 based on clock status
 void speedSensorInterrupt() {

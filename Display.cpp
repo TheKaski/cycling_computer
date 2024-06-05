@@ -2,8 +2,8 @@
 #include "Display.h"
 #include "Segments.h"
 
-//7-Segment Display start:
-//      PUBLIC METHODS
+// 7-Segment Display start:
+// PUBLIC 
 sevSegmentDisplay::sevSegmentDisplay(int numOfDigits, int* digitPins, int numOfSegments, int* segmentPins) 
 {
     this->numOfDigits = numOfDigits;  
@@ -15,7 +15,7 @@ sevSegmentDisplay::sevSegmentDisplay(int numOfDigits, int* digitPins, int numOfS
 void sevSegmentDisplay::begin() 
 {
   setupDisplay();
-  startupAnimation();
+  startupAnimation(); // Screen test animation that all the segments are correctly lighted up
   
 }
 
@@ -24,7 +24,9 @@ void sevSegmentDisplay::show(char data[], int size, int delaytime)
   //Function for showing given data on screen. Output will show max ammount of characters that can be fitted in the provided display at once
   bool refresh = false;
   int T1 = millis();
-  while(refresh == false) //THIS IS A TEST IMPLEMENTATION FOR LIMITING THE SCREEN REFRESHRATE  BY SHOWING SAME DATA FOR THE TIME OF DELAYTIME
+
+  // This loop will use the delaytime to determine the time each digit is displayed.
+  while(refresh == false) 
   {
     int digit = 0;
     int dataIndex = 0;
@@ -54,14 +56,7 @@ void sevSegmentDisplay::show(char data[], int size, int delaytime)
     } 
   }
 }
-
-void sevSegmentDisplay::setBrightnessPercentage(int brightness) 
-//THIS FUNCTION IS CURRENTLY OUT OF USE DUE PROBLEMS WITH THE BRIGHTNESS OFF THE DISPLAY COMPONENT
-{
-  this->brightness = 10-(brightness / 10); //The brightness value is given as percentage which we convert to PWM delay value to control the brightness
-                                           //by doing this the greater value for brightnes we give the shorter the delay between digits will be 
-}
-//      PRIVATE METHODS:
+// PRIVATE:
 void sevSegmentDisplay::showDigit(int digitPin, char dataChar, bool hasDot)
 {
   //show digit will turn on the segments for the specified character and then light up the full digit
@@ -75,9 +70,8 @@ void sevSegmentDisplay::showDigit(int digitPin, char dataChar, bool hasDot)
   //Turn the segments off
   turnOFFSegments();
   digitalWrite(digitPin, HIGH);
-
 }
-
+// Function for initializing the screen component
 void sevSegmentDisplay::setupDisplay()
 {
    //Set the digitPins  as OUTPUTS:
@@ -158,7 +152,4 @@ void sevSegmentDisplay::startupAnimation()
     digitalWrite(this->digitPins[pin], HIGH);
   }
 }
-
 //7-Segment Display end
-
-//Other displays:TODO
