@@ -3,6 +3,11 @@
 ## Introduction
 This project aims to offer way to turn your Arduino board into a basic cycling speedometer with the following measurement features implemented: Current speed, Average speed, Travelled distance and Cadence sensor. Additionally this project also offers 3D models for 3D printed parts including: casing of the board, casing of the sensor, holder for magnets. This code was implemented for the board: Arduino RP2040 Nano Connect, but other boards should also be compatitible with the code with minor adjustments. Check the Hardware section for more details about my specific build.
 
+## Contributors
+<a href="https://github.com/TheKaski/cycling_computer/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=TheKaski/cycling_computer" />
+</a>
+
 ## Goals and outcomes of this project
 The goals for this project were to:
 1. Find interesting use case for Arduino board and develop a solution for that use case
