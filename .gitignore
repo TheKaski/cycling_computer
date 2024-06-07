@@ -1,1 +1,9 @@
-.\vscode\
+# Ignore all hidden files
+.*
+# Exclude .gitignore from being ignored
+!/.gitignore
+
+# Specifically ignore general IDE directories
+.vscode/
+.idea/
+.DS_Store
