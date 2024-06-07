@@ -48,10 +48,3 @@ Resistors(Ω): 10K, 680, 220
 Magnets: 2pcs small neodymium magnets
 
 3D filament: PLA
-
-## Features(Under development)
-
-- 8 segment -digital display
-- LCD -display
-- Read sensor input
-- Show speed
