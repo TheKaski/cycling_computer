@@ -1,3 +1,9 @@
+# Ignore all hidden files
 .*
+# Exclude .gitignore from being ignored
 !/.gitignore
-build/
+
+# Specifically ignore general IDE directories
+.vscode/
+.idea/
+.DS_Store
