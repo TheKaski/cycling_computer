@@ -17,6 +17,10 @@ This project aims to offer way to turn your Arduino board into a basic cycling s
 - **Average Speed**
 - **Travelled Distance**
 
+## Features under development
+
+-
+
 ## Goals and outcomes of this project
 
 The goals for this project were to:
