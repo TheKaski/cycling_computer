@@ -16,7 +16,7 @@ This project aims to offer way to turn your Arduino board into a basic cycling s
 - **Current Speed**
 - **Average Speed**
 - **Travelled Distance**
-- BLE support for speed and cadence
+- **BLE support for speed and cadence**
 
 ## Goals and outcomes of this project
 
@@ -58,5 +58,6 @@ Magnets: 2pcs small neodymium magnets
 3D filament: PLA
 
 ## Libraries required:
+
 - ArduinoBLE
 - avr/dtostrf

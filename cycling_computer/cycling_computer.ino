@@ -199,8 +199,13 @@ void handleNavigationPress()
 // Used to clear for example metrics recorded before starting a ride (taking bike out and setting it up)
 void resetMetrics()
 {
-  speed, distance, avgSpeed, time_s, cadence = 0;  
-  rotationsCount, crankRotationsCount = 0;
+  speed = 0;
+  distance = 0;
+  avgSpeed = 0;
+  time_s = 0;
+  cadence = 0;  
+  rotationsCount = 0;
+  crankRotationsCount = 0;
   //Reset the clocks
   clockEnabled = false;
   cadenceClockEnabled = false;
