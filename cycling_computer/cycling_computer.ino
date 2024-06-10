@@ -13,7 +13,7 @@ const int cadenceSensor = 0; //CadenceSensor can be configured by using this pin
 
 // Clock variables for speed
 bool clockEnabled = false;  // Variable for determining the speedSensor clock state
-volatile unsigned long int T1, T2, timeDiff, clockTime, lastClockTime;  // Time values used by the speedsensor
+volatile unsigned long int T1, T2, timeDiff; // Time values used by the speedsensor
 
 // Clock variables for cadence
 bool cadenceClockEnabled = false;
@@ -39,6 +39,10 @@ volatile float time_s = 0;  // time in seconds is unused for now.
 volatile float cadence = 0;
 volatile unsigned long rotationsCount = 0; // keeping a record of the recorded rotations to calculate average speed and the travelled distance
 volatile unsigned long crankRotationsCount = 0;
+
+// NavButton:
+bool buttonPressed = false;
+unsigned long buttonPressTime = 0;
 
 //Setup display variables:   
 const int numOfDigits = 4;
@@ -88,7 +92,7 @@ void setup() {
   if(cadenceSensorActive)
   {
     pinMode(cadenceSensor, INPUT);
-    attachInterrupt(digitalPinToInterrupt(speedSensor), cadenceSensorInterrupt, LOW); //Uncomment this line for the cadence
+    attachInterrupt(digitalPinToInterrupt(cadenceSensor), cadenceSensorInterrupt, LOW); //Uncomment this line for the cadence
   }
 
   //Start the display
@@ -114,7 +118,7 @@ void loop() {
   // Show the correct variable on screen
   updateDisplayValue(); 
   //Handle any navigation buttonpresses:
-  handleNavigation();
+  handleNavigationButton();
 
   //If the central device is connected, send data:
   if(central.connected()) {
@@ -122,7 +126,8 @@ void loop() {
   }
 }
 // Function for updating what value shown on the screen.
-void updateDisplayValue() {
+void updateDisplayValue() 
+{
   switch (navIndex) {
     case 0:
       // Display avgSpeed
@@ -153,23 +158,54 @@ void displayValue(float value)
 }
 
 // Function for handling the navigation logic of the navButtonButton
-void handleNavigation()
+void handleNavigationButton()
 {
-  // Check wheter the navigation button was pressed:
-  int navButtonState = digitalRead(navButton);
-  
-  if(navButtonState == HIGH) {
-    Serial.println("Changing the view");
-    // Navigation index is increased untill the maxIndex is reached and it is set back to 0:
-    if(navIndex == maxIndex) {
-      navIndex = 0;
-      displayNavigationBar(navIndex);
-      return;
-    }
-    navIndex = navIndex+1;
-    displayNavigationBar(navIndex);
-  }
 
+  // Here we "record" the button press when detected:
+  if(digitalRead(navButton) == HIGH && !buttonPressed)
+  {
+    buttonPressed = true;
+    buttonPressTime = millis();
+    return;
+  }
+  // When button goes to LOW when it is pressed we take second time and estimate the result:
+  if(digitalRead(navButton) == LOW && buttonPressed)
+    {
+      // Calculate how long was the press:
+      unsigned long pressDuration = millis() - buttonPressTime;
+      if(pressDuration < 1000 )
+      { // Short press for navigation:
+        handleNavigationPress();
+      } else if (pressDuration > 2000)
+      { // Long press is for resetting variables
+        resetMetrics();
+      }
+      // Always set the flag back to false
+      buttonPressed = false;
+    }
+}
+
+void handleNavigationPress()
+{
+  if(navIndex == maxIndex) {
+          navIndex = 0;
+          displayNavigationBar(navIndex);
+          return;
+        }
+        navIndex = navIndex+1;
+        displayNavigationBar(navIndex);
+}
+//Function for resetting the metrics on runtime
+// Used to clear for example metrics recorded before starting a ride (taking bike out and setting it up)
+void resetMetrics()
+{
+  speed, distance, avgSpeed, time_s, cadence = 0;  
+  rotationsCount, crankRotationsCount = 0;
+  //Reset the clocks
+  clockEnabled = false;
+  cadenceClockEnabled = false;
+  // Show the reset by re begining the diplay:
+  segmentDisplay.begin();
 }
 
 // Function for displaying a simple navindex on the screen based on navIndex.
