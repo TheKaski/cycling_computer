@@ -1,6 +1,6 @@
 ## Introduction
 
-This project aims to offer way to turn your Arduino board into a basic cycling speedometer with the following measurement features implemented: Current speed, Average speed, Travelled distance and Cadence sensor. Additionally this project also offers 3D models for 3D printed parts including: casing of the board, casing of the sensor, holder for magnets. This code was implemented for the board: Arduino RP2040 Nano Connect, but other boards should also be compatitible with the code with minor adjustments. Check the Hardware section for more details about my specific build.
+This project aims to offer way to turn your Arduino board into a basic cycling speedometer with the following measurement features implemented: Current speed, Average speed, Travelled distance and Cadence sensor. Additionally this project also offers 3D models for 3D printed parts including: casing of the board, casing of the sensor, holder for magnets. This code was implemented for the board: Arduino RP2040 Nano Connect with BLE support, but other boards should also be compatitible with the code with minor adjustments. Check the Hardware section for more details about my specific build.
 
 ## Contributors
 
@@ -55,3 +55,7 @@ Resistors(Ω): 10K, 680, 220
 Magnets: 2pcs small neodymium magnets
 
 3D filament: PLA
+
+## Libraries required:
+- ArduinoBLE
+- avr/dtostrf
