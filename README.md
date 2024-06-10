@@ -8,6 +8,19 @@ This project aims to offer way to turn your Arduino board into a basic cycling s
   <img src="https://contrib.rocks/image?repo=TheKaski/cycling_computer" />
 </a>
 
+## Supported Features
+
+- **Speed Sensor**
+- **Cadence Sensor**
+- **7/8-Segment Display**
+- **Current Speed**
+- **Average Speed**
+- **Travelled Distance**
+
+## Features under development
+
+-
+
 ## Goals and outcomes of this project
 
 The goals for this project were to:
